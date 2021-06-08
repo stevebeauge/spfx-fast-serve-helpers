@@ -8,7 +8,7 @@ import fetch from 'node-fetch';
 import del from 'del';
 import { Settings } from './common/settings';
 import { getJSONFile } from './webpack/helpers';
-import { addFastServeTask, addWorkbenchTask, addSaveConfigTask } from './tasks';
+import { addFastServeTask, addSaveConfigTask } from './tasks';
 
 export function addFastServe(build: Build) {
   let useCustomServe = argv['custom-serve'];
@@ -35,7 +35,6 @@ export function addFastServe(build: Build) {
 
   build.tslintCmd.enabled = false;
 
-  addWorkbenchTask(build);
   addSaveConfigTask(build);
 }
 
