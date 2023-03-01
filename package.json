@@ -12,7 +12,7 @@
     "prepublishOnly": "rimraf -- lib && npm run build",
     "dev": "tsc -p . --watch",
     "pub:beta": "npm publish --tag beta",
-    "prepare": "tsc -p"
+    "prepare": "tsc -b -v"
   },
   "repository": {
     "type": "git",
