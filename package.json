@@ -11,7 +11,8 @@
     "lint": "eslint -c .eslintrc.json --ext .ts src",
     "prepublishOnly": "rimraf -- lib && npm run build",
     "dev": "tsc -p . --watch",
-    "pub:beta": "npm publish --tag beta"
+    "pub:beta": "npm publish --tag beta",
+    "postinstall": "tsc -b -v"
   },
   "repository": {
     "type": "git",
