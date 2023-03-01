@@ -14,6 +14,11 @@
     "outDir": "./lib",
     "types": [
       "node",
+      "webpack",
+      "webpack-dev-server",
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
     ]
   },
   "include": [
