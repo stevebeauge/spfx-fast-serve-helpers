@@ -24,6 +24,11 @@
     "url": "https://github.com/s-KaiNet/spfx-fast-serve-helpers/issues"
   },
   "homepage": "https://github.com/s-KaiNet/spfx-fast-serve-helpers#readme",
+  "peerDependencies": {
+    "@typescript-eslint/eslint-plugin": ">=4.28.5",
+    "@typescript-eslint/parser": ">=4.28.5",
+    "eslint": ">=8.29.0"
+  },
   "devDependencies": {
     "@rushstack/debug-certificate-manager": "^1.2.16",
     "@types/node": "15.0.2",
