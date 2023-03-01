@@ -15,6 +15,11 @@ export function getJSONFile<T = any>(relPath: string) {
   return require(path.join(process.cwd(), relPath)) as T;
 }
 
+export function saveJSONFile(relPath: string, data: any) {
+  const json = JSON.stringify(data, null, 2);
+  fs.writeFileSync(path.join(process.cwd(), relPath), json);
+}
+
 export function setDefaultServeSettings(settings: Settings) {
   const defaultServeSettings: Settings['serve'] = {
     eslint: true,

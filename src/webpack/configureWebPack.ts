@@ -1,15 +1,15 @@
-import * as path from 'path';
-import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import del from 'del';
+import * as path from 'path';
+import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 import { Manifest, ModulesMap, SPFxConfig } from '../common/types';
 import { DynamicLibraryPlugin } from '../plugins/DynamicLibraryPlugin';
-import { addCopyLocalExternals, addCopyLocalizedResources, checkVersions, createLocalExternals, getEntryPoints, getJSONFile } from './helpers';
+import { addCopyLocalExternals, addCopyLocalizedResources, checkVersions, createLocalExternals, getEntryPoints, getJSONFile, saveJSONFile } from './helpers';
 
-import { createBaseConfig } from './baseConfig';
 import { Settings } from '../common/settings';
 import { applyServeSettings } from '../settings';
+import { createBaseConfig } from './baseConfig';
 
 const rootFolder = path.resolve(process.cwd());
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -86,4 +86,11 @@ const createConfig = async function () {
   return baseConfig;
 }
 
-export const resultConfig = async (): Promise<webpack.Configuration> => merge(transformConfig(await createConfig(), webpack), webpackConfig);
+export const resultConfig = async (): Promise<webpack.Configuration> => {
+  const config = merge(transformConfig(await createConfig(), webpack), webpackConfig);
+
+  // Dump actual final config to file
+  saveJSONFile('temp/fast-serve-webpack.config.json', config);
+
+  return config;
+};
