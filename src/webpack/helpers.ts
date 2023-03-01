@@ -1,14 +1,14 @@
-import * as path from 'path';
-import * as fs from 'fs';
-import * as globby from 'globby';
-import getPort from 'get-port';
 import colors from 'colors';
+import * as fs from 'fs';
+import getPort from 'get-port';
+import * as globby from 'globby';
+import * as path from 'path';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const killPort = require('kill-port')
 
+import webpack from 'webpack';
 import { Settings } from '../common/settings';
 import { EntryPoints, ExternalsObject, LocalizedResources, Manifest, NodePackage, ResourceData, SPFxConfig } from '../common/types';
-import webpack from 'webpack';
 
 export function getJSONFile<T = any>(relPath: string) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -224,8 +224,16 @@ export async function freePortIfInUse(port: number) {
 
 export function checkVersions() {
   const packageJson = getJSONFile<NodePackage>('package.json');
-  const spfxVersion = getMinorVersion(packageJson, '@microsoft/sp-build-web');
   const fastServeVersion = getMinorVersion(packageJson, 'spfx-fast-serve-helpers');
+  const spfxVersion = getMinorVersion(packageJson, '@microsoft/sp-build-web');
+
+    // eslint-disable-next-line no-console
+  console.log({ fastServeVersion, spfxVersion });
+  // Detect local debugging conditions
+  if (isNaN(fastServeVersion)) {
+    return;
+  }
+  
 
   if (spfxVersion !== fastServeVersion) {
     throw new Error(`SPFx Fast Serve: version mismatch. We detected the usage of SPFx 1.${spfxVersion}, but "spfx-fast-serve-helpers" version is 1.${fastServeVersion}. Please change "spfx-fast-serve-helpers" version to ~1.${spfxVersion}.0, delete node_modules, package-lock.json and reinstall dependencies.`);

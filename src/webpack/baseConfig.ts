@@ -1,17 +1,17 @@
-import webpack from 'webpack';
+import { AsyncComponentPlugin } from '@microsoft/spfx-heft-plugins/lib/plugins/webpackConfigurationPlugin/webpackPlugins/AsyncComponentPlugin';
 import * as path from 'path';
+import webpack from 'webpack';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const certificateManager = require('@rushstack/debug-certificate-manager');
 const certificateStore = new certificateManager.CertificateStore();
-import { AsyncComponentPlugin } from '@microsoft/spfx-heft-plugins/lib/plugins/webpackConfigurationPlugin/webpackPlugins/AsyncComponentPlugin';
 
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import { readFile } from 'tsconfig';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import { Settings } from '../common/settings';
 import { ClearCssModuleDefinitionsPlugin } from '../plugins/ClearCssModuleDefinitionsPlugin';
 import { TypeScriptResourcesPlugin } from '../plugins/TypeScriptResourcesPlugin';
 import { freePortIfInUse, getExternalComponents } from './helpers';
-import { Settings } from '../common/settings';
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
-import { readFile } from 'tsconfig';
 
 const rootFolder = path.resolve(process.cwd());
 
@@ -67,13 +67,7 @@ export async function createBaseConfig(cli: Settings['cli']): Promise<webpack.Co
         {
           use: [
             {
-              loader: require.resolve('ts-loader'),
-              options: {
-                transpileOnly: true,
-                compilerOptions: {
-                  declarationMap: false
-                }
-              },
+              loader: require.resolve('esbuild-loader')
             }
           ],
           test: /\.tsx?$/,
