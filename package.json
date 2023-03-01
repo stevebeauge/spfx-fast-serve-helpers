@@ -7,12 +7,11 @@
     "fast-serve": "lib/serve.js"
   },
   "scripts": {
-    "build": "npm run lint && tsc -p .",
+    "build": "npm run lint && tsc -b -v",
     "lint": "eslint -c .eslintrc.json --ext .ts src",
     "prepublishOnly": "rimraf -- lib && npm run build",
     "dev": "tsc -p . --watch",
-    "pub:beta": "npm publish --tag beta",
-    "postinstall": "tsc -b -v"
+    "pub:beta": "npm publish --tag beta"
   },
   "repository": {
     "type": "git",
@@ -28,25 +27,25 @@
     "@rushstack/debug-certificate-manager": "^1.2.16",
     "@types/node": "15.0.2",
     "@types/node-fetch": "^2.6.2",
-    "@types/webpack": "4.41.30",
-    "@typescript-eslint/eslint-plugin": "4.28.5",
-    "@typescript-eslint/parser": "4.28.5",
+    "@types/webpack": "4.41.33",
+    "@typescript-eslint/eslint-plugin": "5.38.1",
+    "@typescript-eslint/parser": "5.48.0",
     "concurrently": "6.2.0",
     "cpy-cli": "3.1.1",
     "esbuild-loader": "^3.0.1",
-    "eslint": "7.31.0",
+    "eslint": "8.29.0",
     "onchange": "7.1.0",
     "rimraf": "3.0.2",
-    "tsconfig-paths-webpack-plugin": "3.5.2",
-    "typescript": "4.3.5"
+    "tsconfig-paths-webpack-plugin": "4.0.0",
+    "typescript": "4.8.4"
   },
   "dependencies": {
     "@microsoft/loader-load-themed-styles": "1.9.128",
     "@microsoft/spfx-heft-plugins": "1.16.1",
-    "@pmmmwh/react-refresh-webpack-plugin": "0.5.7",
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.10",
     "@types/copy-webpack-plugin": "6.4.3",
-    "@types/loader-utils": "2.0.2",
-    "@types/webpack-dev-server": "3.11.4",
+    "@types/loader-utils": "2.0.3",
+    "@types/webpack-dev-server": "4.7.2",
     "@types/yargs": "6.6.0",
     "autoprefixer": "9.8.8",
     "clean-css-loader": "3.0.0",
@@ -64,7 +63,7 @@
     "postcss": "7.0.38",
     "postcss-loader": "4.2.0",
     "react-refresh": "0.14.0",
-    "react-refresh-typescript": "2.0.6",
+    "react-refresh-typescript": "2.0.8",
     "sass": "1.44.0",
     "sass-loader": "9.0.3",
     "spfx-css-modules-typescript-loader": "4.0.5",
@@ -74,7 +73,7 @@
     "webpack": "4.44.2",
     "webpack-cli": "4.6.0",
     "webpack-dev-server": "3.11.2",
-    "webpack-merge": "5.7.3",
+    "webpack-merge": "5.8.0",
     "yargs": "4.6.0"
   }
 }
